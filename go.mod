@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/bwmarrin/discordgo v0.28.1
-	github.com/docker/docker v26.1.1+incompatible
+	github.com/docker/docker v26.1.5+incompatible
 	github.com/samber/lo v1.39.0
 	github.com/spf13/viper v1.18.2
 )
