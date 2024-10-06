@@ -20,7 +20,7 @@ type DockerClient interface {
 	GetContainers() []*models.KtContainer
 
 	// Get container details with his Id
-	GetContainer(id string) *models.KtContainer
+	GetContainer(id string) (*models.KtContainer, error)
 
 	// Start the container with name
 	StartContainer(name string) error
@@ -96,7 +96,7 @@ func (c *KtClient) UpdateContainer(name string) error {
 	})
 }
 
-func (c *KtClient) GetContainer(id string) *models.KtContainer {
+func (c *KtClient) GetContainer(id string) (*models.KtContainer, error) {
 	// TODO : duplicate from GetContainers, need refactoring
 
 	filter := Filter.Clone()
@@ -120,7 +120,11 @@ func (c *KtClient) GetContainer(id string) *models.KtContainer {
 		}
 	})
 
-	return result[0]
+	if len(result) > 0 {
+		return result[0], nil
+	} else {
+		return nil, fmt.Errorf("container with id: %v not found", id)
+	}
 }
 
 func (c *KtClient) ExecuteWithOneContainer(name string, handle func(ctr *models.KtContainer) error) error {

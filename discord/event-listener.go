@@ -32,7 +32,15 @@ func listenToDockerEvents() {
 }
 
 func updateContainerStatus(id string, action events.Action) {
-	container := dockerClient.GetContainer(id)
+	if !isEventHandled(action) {
+		return
+	}
+
+	container, err := dockerClient.GetContainer(id)
+
+	if err != nil {
+		log.Printf("Not container with id %v", id)
+	}
 
 	// The state of the container is not accurate at this point
 	// so we take from the event and we pray that it's good?
@@ -73,4 +81,20 @@ func getStateFromAction(action events.Action) string {
 		log.Fatalf("Unknown event action: %v", action)
 		return ""
 	}
+}
+
+func isEventHandled(action events.Action) bool {
+	switch action {
+	case events.ActionStart:
+	case events.ActionRestart:
+	case events.ActionCreate:
+	case events.ActionRemove:
+	case events.ActionPause:
+	case events.ActionStop:
+	case events.ActionDie:
+	case events.ActionKill:
+		return true
+	}
+
+	return false
 }
