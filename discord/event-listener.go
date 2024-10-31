@@ -6,7 +6,6 @@ import (
 	"log"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/events"
 )
 
@@ -16,7 +15,7 @@ func listenToDockerEvents() {
 	filter := docker.Filter.Clone()
 	filter.Add("type", "container")
 
-	msgs, err := dockerClient.Events(cancellableCtx, types.EventsOptions{
+	msgs, err := dockerClient.Events(cancellableCtx, events.ListOptions{
 		Filters: filter,
 	})
 

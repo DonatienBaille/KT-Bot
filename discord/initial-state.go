@@ -22,6 +22,20 @@ func addInitialState() {
 
 		containerMessages[c.Name] = msg
 	}
+
+	botSession.ChannelMessageSendComplex(channelId, &discordgo.MessageSend{
+		Components: []discordgo.MessageComponent{
+			&discordgo.ActionsRow{
+				Components: []discordgo.MessageComponent{
+					discordgo.Button{
+						Label:    "Reload states",
+						CustomID: "reload_state",
+						Style:    discordgo.SuccessButton,
+					},
+				},
+			},
+		},
+	})
 }
 
 func getMessageForContainer(container *models.KtContainer) *discordgo.MessageSend {

@@ -29,6 +29,10 @@ func GetEmbedForContainer(c *models.KtContainer) *discordgo.MessageEmbed {
 				Name:  "State",
 				Value: c.State,
 			},
+			{
+				Name:  "Image",
+				Value: c.Image,
+			},
 		},
 	}
 }

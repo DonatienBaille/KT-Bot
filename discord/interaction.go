@@ -30,6 +30,11 @@ func onUserInteraction(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		case strings.HasPrefix(customId, "update"):
 			notifyInteractionState(s, i, fmt.Sprintf("Updating server %v...", containerName))
 			err = dockerClient.UpdateContainer(containerName)
+		case customId == "reload_state":
+			notifyInteractionState(s, i, "Reloading state of servers...")
+			cleanupMessages()
+			addInitialState()
+			err = nil
 		default:
 			err = fmt.Errorf("unknown interaction: %v", customId)
 		}
