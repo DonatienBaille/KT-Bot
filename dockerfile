@@ -1,6 +1,6 @@
 # We have to get the last certificates to be able to connect to Discord
 # or SSL verification will fail
-FROM alpine:3.19.0 as alpine
+FROM alpine:3.19.0 AS alpine
 RUN apk add --no-cache \
   ca-certificates
 

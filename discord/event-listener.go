@@ -51,7 +51,13 @@ func updateContainerStatus(id string, action events.Action) {
 		edit := discordgo.NewMessageEdit(existingMsg.ChannelID, existingMsg.ID)
 		edit.Components = &msg.Components
 		edit.Embeds = &msg.Embeds
-		botSession.ChannelMessageEditComplex(edit)
+		newMsg, err := botSession.ChannelMessageEditComplex(edit)
+
+		if err != nil {
+			log.Printf("Error while editing message: %v", err)
+		}
+
+		containerMessages[container.Name] = newMsg
 	} else {
 		botSession.ChannelMessageSendComplex(channelId, msg)
 	}

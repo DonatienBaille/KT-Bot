@@ -36,7 +36,7 @@ type DockerClient interface {
 
 	// TODO : Wrap in a custom API and expose only KtContainer
 	// cf. https://pkg.go.dev/github.com/docker/docker/client#Client.Events
-	Events(ctx context.Context, options types.EventsOptions) (<-chan events.Message, <-chan error)
+	Events(ctx context.Context, options events.ListOptions) (<-chan events.Message, <-chan error)
 }
 
 type KtClient struct {
