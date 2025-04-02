@@ -1,3 +1,6 @@
+![Build](https://github.com/DonatienBaille/KT-Bot/actions/workflows/go.yml/badge.svg)
+![Code QL](https://github.com/DonatienBaille/KT-Bot/actions/workflows/github-code-scanning/codeql/badge.svg)
+
 # KT Bot
 
 KT Bot (Kitty Bot) is a little Discord Bot to manage containers directly from Discord. It was developed to allow my friends to restart game servers while I was away.
